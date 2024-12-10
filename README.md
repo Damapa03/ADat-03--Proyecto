@@ -112,3 +112,18 @@ Las excepciones y codigos de estados son:
 
 - Los usuarios no autenticados solo podran acceder a las rutas de registro e inicio de sesion
 - Los usuarios que esten registrados
+  - Si su rol es user:
+    - Podra acceder solo a las reservas a las que este asociado
+    - Podran crear reservas
+    - Podra modificar las reservas a las que este asociado
+    - Podra eliminar las reservas a las que este asociado
+    - Podra ver todos los vuelos existentes
+  - Si su rol es admin:
+    - Podra ver todas las reservas
+    - Podra crear reservas
+    - Podra modificar cualquier reservas
+    - Podra elimincar cualquier reserva
+    - Podra ver todos los vuelos
+    - Podra crear vuelos
+    - Podra modificar cualquier vuelo
+    - Podra eliminar cualquier vuelo
