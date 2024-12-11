@@ -15,13 +15,13 @@ import jakarta.persistence.Table
 data class Usuario(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     var user: String,
     @Column(nullable = false)
     var password: String,
     @OneToMany(mappedBy = "usuario", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var reservas: MutableList<Reserva>? = mutableListOf(),
 
-    var ROL: String
+    var ROL: String? = null
 ) {
 }

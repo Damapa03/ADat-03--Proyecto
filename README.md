@@ -83,20 +83,20 @@ data class Vuelo(
 - **POST** `/reserva`
   - Se crearan nuevas reservas
 - **PUT** `/reserva/{idReserva}`
-      - Se modificara la reserva con el mismo id
+  - Se modificara la reserva con el mismo id
 - **DELETE** `/reserva/{idReserva}`
-    - Se eliminara del sistema la reserva con el mismo id
+  - Se eliminara del sistema la reserva con el mismo id
 ### **Vuelo**
 - **GET** `/vuelo`
-    - Se obtendran todos los vuelos del sistema
+  - Se obtendran todos los vuelos del sistema
 - **GET** `/vuelo/{idVuelo}`
-    - Se obtendran los vuelos con el mismo id
+  - Se obtendran los vuelos con el mismo id
 - **POST** `/vuelo`
-    - Se crearan nuevos vuelos
+  - Se crearan nuevos vuelos
 - **PUT** `/vuelos/{idVuelos}`
   - Se modificara el vuelo con el mismo id
 - **DELETE** `/vuelo/{idVuelo}`
-    - Se eliminara del sistema el vuelo con el mismo id
+  - Se eliminara del sistema el vuelo con el mismo id
 
 ## **Logica de negocio**
 Como logica de negocio se van a serguir los siguientes puntos:
