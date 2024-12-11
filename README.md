@@ -22,7 +22,7 @@ El proyecto busca crear una API que centralice la gestión de vuelos, usuarios y
 ```kotlin
 data class Usuario(
     var id: Long? = null,
-    var user: String,
+    var username: String,
     var password: String,
     var reservas: MutableList<Reserva>? = mutableListOf(),
     var ROL: String

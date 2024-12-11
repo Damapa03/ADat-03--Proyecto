@@ -42,7 +42,7 @@ class SecurityConfig {
                 .requestMatchers(HttpMethod.GET,"/vuelo/").authenticated()
                 .requestMatchers("/vuelo/**").hasRole("ADMIN")
                 .requestMatchers("/reserva/**").authenticated()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
             } // Los recursos protegidos y publicos
             .oauth2ResourceServer { oauth2 -> oauth2.jwt(Customizer.withDefaults()) }
             .sessionManagement { session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }

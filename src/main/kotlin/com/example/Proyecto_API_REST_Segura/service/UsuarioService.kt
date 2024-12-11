@@ -26,7 +26,7 @@ class UsuarioService: UserDetailsService {
             .orElseThrow()
 
         return User.builder()
-            .username(usuario.user)
+            .username(usuario.username)
             .password(usuario.password)
             .roles(usuario.ROL)
             .build()
@@ -36,17 +36,16 @@ class UsuarioService: UserDetailsService {
     /*
     MÉTODO PARA INSERTAR UN USUARIO
      */
-    fun registerUsuario(usuario: Usuario) : ResponseEntity<Usuario> {
+    fun registerUsuario(usuario: Usuario) : ResponseEntity<Any> {
 
         // Comprobamos que el usuario no existe en la base de datos
-        var newUsuario: Usuario = usuarioRepository
-            .findByUsername(usuario.user)
-            .orElseThrow()
+        var newUsuario: Usuario
+        try {
+            newUsuario = usuarioRepository.findByUsername(usuario.username).orElseThrow()
+        }catch (ex:Exception){}
 
-        // Creamos la instancia de Usuario
-        if (newUsuario == null){
-            newUsuario = usuario
-        }
+
+        newUsuario = usuario
 
         /*
          La password del newUsuario debe estar hasheada, así que usamos el passwordEncoder que tenemos definido.
@@ -67,6 +66,6 @@ class UsuarioService: UserDetailsService {
     // Comprobamos que la contraseña del usuario encaja con nuestra logica de negocio
     fun checkUser(user: Usuario): Boolean {
         val regex = "^(?=.*\\d).{8,}$".toRegex()
-        return user.password.matches(regex) && user.user.isBlank()
+        return user.password.matches(regex) && user.username.isNotBlank()
     }
 }

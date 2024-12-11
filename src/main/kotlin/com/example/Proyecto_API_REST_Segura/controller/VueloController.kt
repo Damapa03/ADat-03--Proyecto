@@ -33,7 +33,7 @@ class VueloController {
 
         }
 
-        return vueloService.getByID(idL) as Vuelo
+        return vueloService.getByID(idL)
     }
 
     @PostMapping()

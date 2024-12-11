@@ -16,12 +16,12 @@ data class Usuario(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
     @Column(unique = true, nullable = false)
-    var user: String,
+    var username: String,
     @Column(nullable = false)
     var password: String,
     @OneToMany(mappedBy = "usuario", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var reservas: MutableList<Reserva>? = mutableListOf(),
 
-    var ROL: String? = null
+    var ROL: String? = "USER"
 ) {
 }

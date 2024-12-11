@@ -3,7 +3,6 @@ package com.example.Proyecto_API_REST_Segura.controller
 import com.example.Proyecto_API_REST_Segura.model.Usuario
 import com.example.Proyecto_API_REST_Segura.service.TokenService
 import com.example.Proyecto_API_REST_Segura.service.UsuarioService
-import org.apache.catalina.User
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -35,7 +34,7 @@ class UsuarioController {
         try {
             authentication = authenticationManager.authenticate(
                 UsernamePasswordAuthenticationToken(
-                    user.user,
+                    user.username,
                     user.password
                 )
             )

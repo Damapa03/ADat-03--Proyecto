@@ -1,7 +1,6 @@
 package com.example.Proyecto_API_REST_Segura.controller
 
 import com.example.Proyecto_API_REST_Segura.model.Reserva
-import com.example.Proyecto_API_REST_Segura.repository.ReservaRepository
 import com.example.Proyecto_API_REST_Segura.service.ReservaService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.util.Optional
 
 @RestController
 @RequestMapping("/reserva")
