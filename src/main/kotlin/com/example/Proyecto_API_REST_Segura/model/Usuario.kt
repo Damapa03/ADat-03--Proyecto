@@ -16,7 +16,6 @@ data class Usuario(
     var username: String,
     @Column(nullable = false)
     var password: String,
-
     var roles: String? = "USER"
 ) {
 }

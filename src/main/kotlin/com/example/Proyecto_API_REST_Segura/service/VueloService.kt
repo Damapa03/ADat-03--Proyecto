@@ -18,8 +18,13 @@ class VueloService {
     fun getVuelos(): List<Vuelo>{
         return vueloRepository.findAll()
     }
-    fun getByID(id: Long): Vuelo {
-        return vueloRepository.findById(id).get()
+    fun getByID(id: Long): Any {
+
+        try {
+            return vueloRepository.findById(id).get()
+        }catch (ex: Exception){
+            return ResponseEntity(mapOf("message" to "Vuelo no encontrado"), HttpStatus.NOT_FOUND)
+        }
     }
 
     fun insertVuelo(vuelo: Vuelo): ResponseEntity<Any> {
@@ -28,10 +33,10 @@ class VueloService {
         }else ResponseEntity(mapOf("message" to "Error al crear el vuelo"), HttpStatus.BAD_REQUEST)
     }
 
-    fun updateVuelo(vuelo: Vuelo){
+    fun updateVuelo(vuelo: Vuelo): Any {
         if (checkNull(vuelo)){
-            vueloRepository.save(vuelo)
-        }
+            return vueloRepository.save(vuelo)
+        } else return ResponseEntity("message" to "Vuelo no valido", HttpStatus.BAD_REQUEST)
     }
 
     fun deleteVuelo(id: Long): ResponseEntity<Map<String, String>> {

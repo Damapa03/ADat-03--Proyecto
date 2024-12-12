@@ -1,6 +1,7 @@
 package com.example.Proyecto_API_REST_Segura.service
 
 import com.example.Proyecto_API_REST_Segura.model.Reserva
+import com.example.Proyecto_API_REST_Segura.model.Vuelo
 import com.example.Proyecto_API_REST_Segura.repository.ReservaRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -27,17 +28,26 @@ class ReservaService{
         }
     }
 
-    fun postReserva(userUsuario: String, idVuelo: Long): ResponseEntity<Reserva> {
-        var reserva = Reserva(null, usuarioService.getUsuarioByUser(userUsuario), vueloService.getByID(idVuelo))
-        return ResponseEntity(reservaRepository.save(reserva), HttpStatus.CREATED)
+    fun postReserva(userUsuario: String, idVuelo: Long): ResponseEntity<out Any> {
+        try {
+            var reserva = Reserva(null, usuarioService.getUsuarioByUser(userUsuario), vueloService.getByID(idVuelo) as Vuelo)
+            return ResponseEntity(reservaRepository.save(reserva), HttpStatus.CREATED)
+        }catch (e: Exception){
+            return ResponseEntity("message" to "El usuario o el vuelo no existe", HttpStatus.NOT_FOUND)
+        }
+
     }
 
-    fun putReserva(reserva: Reserva, userUsuario: String?, idVuelo: Long?): ResponseEntity<Reserva> {
-        if (userUsuario != null){
-            reserva.usuario = usuarioService.getUsuarioByUser(userUsuario)
-        }
-        if (idVuelo != null){
-            reserva.vuelo = vueloService.getByID(idVuelo)
+    fun putReserva(reserva: Reserva, userUsuario: String?, idVuelo: Long?): ResponseEntity<out Any> {
+        try{
+            if (userUsuario != null) {
+                reserva.usuario = usuarioService.getUsuarioByUser(userUsuario)
+            }
+            if (idVuelo != null) {
+                reserva.vuelo = vueloService.getByID(idVuelo) as Vuelo
+            }
+        }catch (e: Exception){
+            return ResponseEntity("message" to "El usuario o el vuelo no existe", HttpStatus.NOT_FOUND)
         }
         return ResponseEntity(reservaRepository.save(reserva), HttpStatus.CREATED)
     }

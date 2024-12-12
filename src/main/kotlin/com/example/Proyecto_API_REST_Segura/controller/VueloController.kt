@@ -4,7 +4,6 @@ import com.example.Proyecto_API_REST_Segura.model.Vuelo
 import com.example.Proyecto_API_REST_Segura.service.VueloService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
-import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -46,20 +45,22 @@ class VueloController {
     }
 
     @PutMapping("/{idVuelo}")
-    fun putVuelo(@PathVariable idVuelo: Int, @RequestBody vuelo: Vuelo){
+    fun putVuelo(@PathVariable idVuelo: Int, @RequestBody newVuelo: Vuelo): Any {
         var idL: Long = 0
         try {
             idL = idVuelo.toLong()
+            var vuelo = vueloService.getByID(idL) as Vuelo
+            newVuelo.id = vuelo.id
+            return vueloService.updateVuelo(newVuelo)
         }catch (e : Exception){
-
+            return ResponseEntity(mapOf("message" to "Vuelo no encontrado"), HttpStatus.BAD_REQUEST)
         }
-        vuelo.id = vueloService.getByID(idL).id
 
-        vueloService.updateVuelo(vuelo)
+
     }
 
     @DeleteMapping("/{idVuelo}")
-    fun deleteVuelo(@PathVariable idVuelo: Int){
+    fun deleteVuelo(@PathVariable idVuelo: Int): ResponseEntity<Map<String, String>> {
         var idL: Long = 0
         try {
             idL = idVuelo.toLong()
@@ -72,7 +73,7 @@ class VueloController {
                 reservaController.deleteReserva(reserva.id!!.toInt())
             }
         }
-        vueloService.deleteVuelo(idL)
+        return vueloService.deleteVuelo(idL)
     }
 
 }
