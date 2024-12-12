@@ -27,8 +27,6 @@ data class Vuelo(
     @Column(nullable = false)
     var fechaLlegada: LocalDate,
     @Column(nullable = false)
-    var horaLlegada: LocalTime,
-    @OneToMany(mappedBy = "vuelo", cascade = [CascadeType.ALL])
-    var reservas: MutableList<Reserva>? = mutableListOf()
+    var horaLlegada: LocalTime
 ) {
 }
