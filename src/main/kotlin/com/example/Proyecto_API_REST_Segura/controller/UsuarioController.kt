@@ -39,7 +39,7 @@ class UsuarioController {
                 )
             )
         } catch (e: AuthenticationException) {
-            return ResponseEntity(mapOf("mensaje" to "Credencialess incorrectas"), HttpStatus.UNAUTHORIZED)
+            return ResponseEntity(mapOf("mensaje" to "Credencialess incorrectas"), HttpStatus.NOT_FOUND)
         }
 
 
@@ -50,7 +50,7 @@ class UsuarioController {
         token = tokenService.generarToken(authentication)
 
 
-        return ResponseEntity(mapOf("token" to token), HttpStatus.CREATED)
+        return ResponseEntity(mapOf("token" to token), HttpStatus.OK)
 
     }
 
