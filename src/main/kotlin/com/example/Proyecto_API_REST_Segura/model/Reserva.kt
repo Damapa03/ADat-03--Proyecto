@@ -16,10 +16,10 @@ import jakarta.persistence.Table
 data class Reserva(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
-    @ManyToOne(cascade = [(CascadeType.MERGE)])
+    @ManyToOne()
     @JoinColumn(name = "usuario_id")
     var usuario: Usuario,
-    @ManyToOne(cascade = [(CascadeType.MERGE)])
+    @ManyToOne()
     @JoinColumn(name = "vuelo_id")
     var vuelo: Vuelo
 ) {
