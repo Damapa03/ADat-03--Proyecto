@@ -97,6 +97,7 @@ data class Vuelo(
 ## **Logica de negocio**
 Como logica de negocio se van a serguir los siguientes puntos:
 - Ninguno de los datos de los vuelos puede ser nulo
+- Los vuelos que sean eliminados, eliminaran a su vez la reserva en el que este asociado
 - Las contraseñas de los usuarios han de ser minimo de 8 caracteres y contener al menos un numero
 
 ## **Excepciones y codigos de estado**
