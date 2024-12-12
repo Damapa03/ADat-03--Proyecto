@@ -34,8 +34,11 @@ class VueloService {
         }
     }
 
-    fun deleteVuelo(id: Long){
-        vueloRepository.deleteById(id)
+    fun deleteVuelo(id: Long): ResponseEntity<Map<String, String>> {
+        if (vueloRepository.findById(id).isPresent){
+            vueloRepository.deleteById(id)
+            return ResponseEntity(mapOf("message" to "Vuelo eliminado"), HttpStatus.OK)
+        }else return ResponseEntity(mapOf("message" to "Vuelo no encontrado"), HttpStatus.BAD_REQUEST)
     }
 
     fun checkNull(vuelo: Vuelo): Boolean {
