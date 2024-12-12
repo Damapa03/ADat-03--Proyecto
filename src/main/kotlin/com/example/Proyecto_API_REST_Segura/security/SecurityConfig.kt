@@ -39,10 +39,12 @@ class SecurityConfig {
             .csrf { csrf -> csrf.disable() } // Cross-Site Forgery
             .authorizeHttpRequests { auth -> auth
                 .requestMatchers("/usuario/**").permitAll()
-                .requestMatchers(HttpMethod.GET,"/vuelo/").authenticated()
+                .requestMatchers(HttpMethod.GET,"/vuelo").authenticated()
+                .requestMatchers(HttpMethod.GET, "/vuelo/{idVuelo}").authenticated()
                 .requestMatchers("/vuelo/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET ,"/reserva").hasRole("ADMIN")
                 .requestMatchers("/reserva/**").authenticated()
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
             } // Los recursos protegidos y publicos
             .oauth2ResourceServer { oauth2 -> oauth2.jwt(Customizer.withDefaults()) }
             .sessionManagement { session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }

@@ -16,7 +16,6 @@ El proyecto busca crear una API que centralice la gestión de vuelos, usuarios y
   - `id`: Este campo es id unico de cada usuario
   - `user`: Este campo es el nombre de usuario con el que se identificara el usuario
   - `password`: Este campo es la contraseña con la que se identificara el usuario
-  - `reservas`: Este campo es la lista de reservas en las que este relacionado el usuario
   - `rol`: Este campo indicara el rol que presenta el usuario dentro de la aplicacion
 
 ```kotlin
@@ -24,7 +23,6 @@ data class Usuario(
     var id: Long? = null,
     var username: String,
     var password: String,
-    var reservas: MutableList<Reserva>? = mutableListOf(),
     var ROL: String
 )
 ```
@@ -53,7 +51,6 @@ data class Reserva(
   - `horaSalida`: Este campo indica la hora en la que el vuelo va a despegar
   - `fechaLlegada`: Este campo indica la fecha en la que el vuelo va a aterrizar
   - `horaLlegada`: Este campo indica la hora en la que el vuelo va a aterrizar
-  - `reservas`: Este campo indica las reservas en las que ese vuelo esta presente
 
 ```kotlin
 data class Vuelo(
@@ -63,8 +60,7 @@ data class Vuelo(
     var fechaSalida: LocalDate,
     var horaSalida: LocalTime,
     var fechaLlegada: LocalDate,
-    var horaLlegada: LocalTime,
-    var reservas: MutableList<Reserva>? = mutableListOf()
+    var horaLlegada: LocalTime
 )
 ```
 ## **Endpoints para cada tabla**
