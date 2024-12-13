@@ -76,7 +76,7 @@ class ReservaController {
             null
         }
 
-        return ResponseEntity(reservaService.putReserva(reserva,user,idVueloL), HttpStatus.OK)
+        return reservaService.putReserva(reserva,user,idVueloL)
     }
 
 
