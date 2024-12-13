@@ -1,22 +1,22 @@
 # **Viajando Ando**
 
 ## **Idea del proyecto**
-La idea del proyecto es la creacion de una API que gestione las reservas de vuelos de una agencia de vuelos
+La idea del proyecto es la creación de una API que gestione las reservas de vuelos de una agencia de vuelos
 
-## **Justificacion del proyecto**
+## **Justificación del proyecto**
 El proyecto busca crear una API que centralice la gestión de vuelos, usuarios y reservas, mejorando la eficiencia y experiencia del cliente.
 
-## **Descripcion de las tablas**
+## **Descripción de las tablas**
 
 ![Entidad relacion](Proyecto_API.png)
 
 ### **Tabla Usuario**
 - Representa a los usuario en el sistema
 - Propiedades:
-  - `id`: Este campo es id unico de cada usuario
+  - `id`: Este campo es id único de cada usuario
   - `user`: Este campo es el nombre de usuario con el que se identificara el usuario
   - `password`: Este campo es la contraseña con la que se identificara el usuario
-  - `rol`: Este campo indicara el rol que presenta el usuario dentro de la aplicacion
+  - `rol`: Este campo indicará el rol que presenta el usuario dentro de la aplicación
 
 ```kotlin
 data class Usuario(
@@ -28,11 +28,11 @@ data class Usuario(
 ```
 
 ### **Tabla Reserva**
-- Representa las reservas a sociadas a un usuario y vuelo
+- Representa las reservas asociadas a un usuario y vuelo
 - Propiedades:
   - `id`: Este campo es el identificador de la reserva
   - `usuario`: Este campo es el usuario al que le pertenece la reserva
-  - `vuelo`: Este campo es el vuelo que esta asiciado a la reserva
+  - `vuelo`: Este campo es el vuelo que está asociado a la reserva
 
 ```kotlin
 data class Reserva(
@@ -46,7 +46,7 @@ data class Reserva(
 - Propiedades:
   - `id`: Este campo es el identificador del vuelo
   - `destino`: Este campo indica el lugar de destino del vuelo
-  - `plazas`: Este campo indica el numero de plazas que quedan en el vuelo
+  - `plazas`: Este campo indica el número de plazas que quedan en el vuelo
   - `fechaSalida`: Este campo indica la fecha en la que el vuelo va a despegar
   - `horaSalida`: Este campo indica la hora en la que el vuelo va a despegar
   - `fechaLlegada`: Este campo indica la fecha en la que el vuelo va a aterrizar
@@ -67,59 +67,60 @@ data class Vuelo(
 
 ### **Usuario**
 - **POST** `/usuario/login` 
-  - Lo usuarios accederan para iniciar sesion en el sistema
+  - Lo usuarios acceden para iniciar sesión en el sistema
 - **POST** `/usuario/register`  
-  - Los usuarios accederan para registrarse en el sistema
+  - Los usuarios accederán para registrarse en el sistema
 
 ### **Reserva**
 - **GET** `/reserva`
-  - Se obtendran todas las reservas del sistema
+  - Se obtendrán todas las reservas del sistema
 - **GET** `/reserva/{idReserva}`
-  - Se obtendran las reservas con el mismo id
+  - Se obtendrán las reservas con el mismo id
 - **POST** `/reserva`
-  - Se crearan nuevas reservas
+  - Se crearán nuevas reservas
 - **PUT** `/reserva/{idReserva}`
-  - Se modificara la reserva con el mismo id
+  - Se modifica la reserva con el mismo id
 - **DELETE** `/reserva/{idReserva}`
-  - Se eliminara del sistema la reserva con el mismo id
+  - Se eliminará del sistema la reserva con el mismo id
 ### **Vuelo**
 - **GET** `/vuelo`
-  - Se obtendran todos los vuelos del sistema
+  - Se obtendrán todos los vuelos del sistema
 - **GET** `/vuelo/{idVuelo}`
-  - Se obtendran los vuelos con el mismo id
+  - Se obtendrán los vuelos con el mismo id
 - **POST** `/vuelo`
-  - Se crearan nuevos vuelos
+  - Se crearán nuevos vuelos
 - **PUT** `/vuelos/{idVuelos}`
-  - Se modificara el vuelo con el mismo id
+  - Se modifica el vuelo con el mismo id
 - **DELETE** `/vuelo/{idVuelo}`
-  - Se eliminara del sistema el vuelo con el mismo id
+  - Se eliminará del sistema el vuelo con el mismo id
 
-## **Logica de negocio**
-Como logica de negocio se van a serguir los siguientes puntos:
+## **Lógica de negocio**
+Como lógica de negocio se van a seguir los siguientes puntos:
 - Ninguno de los datos de los vuelos puede ser nulo
-- Las contraseñas de los usuarios han de ser minimo de 8 caracteres y contener al menos un numero
+- Los vuelos que sean eliminados, eliminaran a su vez la reserva en el que esté asociado
+- Las contraseñas de los usuarios han de ser mínimo de 8 caracteres y contener al menos un número
 
-## **Excepciones y codigos de estado**
-Las excepciones y codigos de estados son:
+## **Excepciones y códigos de estado**
+Las excepciones y códigos de estados son:
 - `ValidationException` - 400 Bad Request
 - `ResourceNotFoundException` - 404 Not Found
 
 ## **Restricciones de seguridad**
 
-- Los usuarios no autenticados solo podran acceder a las rutas de registro e inicio de sesion
-- Los usuarios que esten registrados
+- Los usuarios no autenticados solo podrán acceder a las rutas de registro e inicio de sesión
+- Los usuarios que estén registrados
   - Si su rol es user:
-    - Podra acceder solo a las reservas a las que este asociado
-    - Podran crear reservas
-    - Podra modificar las reservas a las que este asociado
-    - Podra eliminar las reservas a las que este asociado
-    - Podra ver todos los vuelos existentes
+    - Podrá acceder solo a las reservas a las que esté asociado
+    - Podrán crear reservas
+    - Podrá modificar las reservas a las que esté asociado
+    - Podrá eliminar las reservas a las que esté asociado
+    - Podrá ver todos los vuelos existentes
   - Si su rol es admin:
-    - Podra ver todas las reservas
-    - Podra crear reservas
-    - Podra modificar cualquier reservas
-    - Podra elimincar cualquier reserva
-    - Podra ver todos los vuelos
-    - Podra crear vuelos
-    - Podra modificar cualquier vuelo
-    - Podra eliminar cualquier vuelo
+    - Podrá ver todas las reservas
+    - Podrá crear reservas
+    - Podrá modificar cualquier reservas
+    - Podrá eliminar cualquier reserva
+    - Podrá ver todos los vuelos
+    - Podrá crear vuelos
+    - Podrá modificar cualquier vuelo
+    - Podrá eliminar cualquier vuelo
